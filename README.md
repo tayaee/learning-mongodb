@@ -1,17 +1,17 @@
 # Learning MongoDB
 
-## Install Docker Toolbox
+## Docker: Install Docker Toolbox
   * VirtualBox is automatically installed if not installed.
   * Kitematic (UI) and Docker Quickstart Terminal (CLI) are included in the Docker Toolbox
 
-  # Create docker VM
+## Docker: Create docker VM
 ```
 % set "PATH=C:\Program Files\Docker Toolbox;C:\Program Files\Docker Toolbox\kitematic;C:\Program Files\Docker Toolbox\kitematic\resources\resources;%PATH%"
 % docker-machine rm -f default
 % docker-machine create -d virtualbox --virtualbox-cpu-count 8 --virtualbox-memory 64000 --virtualbox-disk-size 64000 default
 ```
 
-  # Set up connection to docker VM
+## Docker: Set up connection to docker VM
 ```
 % FOR /f "tokens=*" %i IN ('docker-machine env default') DO @%i // for Command Prompt
 REM FOR /f "tokens=*" %%i IN ('docker-machine env default') DO @%%i // for .bat file
@@ -20,7 +20,7 @@ REM FOR /f "tokens=*" %%i IN ('docker-machine env default') DO @%%i // for .bat 
 % docker-machine status
 ```
 
-## Create containers
+## Docker: Create containers
   * Run hello-world container
 
 	```
@@ -37,7 +37,7 @@ REM FOR /f "tokens=*" %%i IN ('docker-machine env default') DO @%%i // for .bat 
 	docker run -it --rm --name mongosh --link mongodb-server:mongodb-server bitnami/mongodb mongosh mongodb://mongodb-server/test -u test -p test
 	```
 
-## MongoDB DDL
+## MongoDB: DDL
   * Use test database
 	```
 	show dbs
@@ -55,7 +55,7 @@ REM FOR /f "tokens=*" %%i IN ('docker-machine env default') DO @%%i // for .bat 
     db.catalog.drop()
 	```
 
-## MongoDB DML
+## MongoDB: DML
 
   * Creating a document
 	```
@@ -82,16 +82,16 @@ REM FOR /f "tokens=*" %%i IN ('docker-machine env default') DO @%%i // for .bat 
     db.catalog.remove({})
 	```
 
-## MongoDB Query
-  * Finding any docs
+## MongoDB: Query
+  * Finding a matching first doc
 	```
     db.catalog.findOne()
-	db.catalog.find()
+	db.catalog.findOne({ "catalogId": "catalog2" })	
 	```
   
-  * Filtering docs
+  * Filtering all matching docs
 	```
-	db.catalog.findOne({ "catalogId": "catalog2" })
+	db.catalog.find()
 	db.catalog.find({ "catalogId": "catalog1" })
 	```
 
